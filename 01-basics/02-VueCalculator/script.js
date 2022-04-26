@@ -3,35 +3,29 @@ import { createApp } from './vendor/vue.esm-browser.js';
 const calculator = {
   data () {
     return {
-      calcData: {
-        num1: 0,
-        num2: 0,
-        operator: 'sum'
-      },
-      result: 0
+      num1: 0,
+      num2: 0,
+      operator: 'sum'
     }
   },
 
-  watch: {
-    calcData: {
-      deep: true,
-      handler () {
-        this.calc(this.calcData.operator)
-      }
+  computed: {
+    result () {
+      return this.calc(this.operator)
     }
   },
 
   methods: {
     calc(operator) {
       switch (operator) {
-        case 'sum': this.result = this.calcData.num1 + this.calcData.num2; break;
-        case 'subtract': this.result = this.calcData.num1 - this.calcData.num2; break;
-        case 'multiply': this.result = this.result = this.calcData.num1 * this.calcData.num2; break;
-        case 'divide': this.result = this.calcData.num2 ? this.calcData.num1 / this.calcData.num2 : 0; break;
-        default: alert('Оператор не найден!');
+        case 'sum': return this.num1 + this.num2;
+        case 'subtract': return this.num1 - this.num2;
+        case 'multiply': return this.num1 * this.num2;
+        case 'divide': return this.num2 ? this.num1 / this.num2 : 0;
+        default: return 0;
       }
     }
   }
 }
 
-const app = createApp(calculator).mount('#app')
+createApp(calculator).mount('#app')
