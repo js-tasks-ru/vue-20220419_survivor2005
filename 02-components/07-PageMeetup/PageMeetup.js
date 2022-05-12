@@ -29,39 +29,31 @@ export default defineComponent({
 
   watch: {
     meetupId () {
-      this.getMeetupData()
+      this.meetupData = null
+      fetchMeetupById(this.meetupId)
+      .then(data => this.meetupData = data)
+      .catch(err => this.meetupData = {'err': err.message})
     }
   },
 
   created () {
-    this.getMeetupData()
-    console.log(fetchMeetupById(this.meetupId))
-  },
-
-  methods: {
-    getMeetupData () {
-      this.meetupData = null
-      fetchMeetupById(this.meetupId)
-      .then(res => {
-        this.meetupData = res
-      })
-      .catch(error => {
-        this.meetupData = { 'err': error.message }
-      })
-    }
+    fetchMeetupById(this.meetupId)
+    .then(data => this.meetupData = data)
+    .catch(err => this.meetupData = {'err': err.message})
   },
 
 
   template: `
     <div class="page-meetup">
-      <MeetupView v-if="meetupData && !meetupData?.err" :meetup="meetupData" />
 
-      <ui-container v-show="meetupData === null">
+      <ui-container v-if="!meetupData">
         <ui-alert>Загрузка...</ui-alert>
       </ui-container>
 
-      <ui-container v-if="meetupData?.err">
-        <ui-alert>{{ meetupData.err }}</ui-alert>
+      <ui-container v-else-if="meetupData?.err">
+        <ui-alert :msg="meetupData.err"></ui-alert>
       </ui-container>
+
+      <MeetupView v-else :meetup="meetupData" />
     </div>`,
 });
