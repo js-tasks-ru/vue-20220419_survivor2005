@@ -9,7 +9,7 @@ export default defineComponent({
   },
 
   template: `
-    <div class="meetup-cover" :style="image && { '--bg-url': \`url(\${image})\`}"> // сделал тупо на вашем примере, но не совсем понимаю как это работает, вроде он должен тут вернуть тру или фолс, но каким то чудом он применяет стили!
+    <div class="meetup-cover" :style="image && { '--bg-url': \`url(\${image})\`}">
         <h1 class="meetup-cover__title">{{ title }}</h1>
     </div>`,
 });
