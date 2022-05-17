@@ -1,7 +1,8 @@
 <template>
-  <div class="form-group">
+  <div class="form-group" :class="{'form-group_inline' : inline}">
     <!-- form-group_inline -->
-    <label class="form-group__label">label text</label>
+    <label class="form-group__label" v-if="label">{{ label }}</label>
+    <slot />
     <!-- CONTENT -->
   </div>
 </template>
@@ -9,6 +10,11 @@
 <script>
 export default {
   name: 'UiFormGroup',
+
+  props: {
+    inline: false,
+    label: undefined
+  }
 };
 </script>
 
