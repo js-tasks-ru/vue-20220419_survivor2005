@@ -12,6 +12,10 @@ import TheToaster from './components/TheToaster';
 export default {
   name: 'App',
 
+  mounted () {
+    console.log(this.$refs)
+  },
+
   components: { TheToaster },
 
   methods: {
