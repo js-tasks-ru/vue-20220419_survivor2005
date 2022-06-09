@@ -2,10 +2,7 @@
   <component
     :is="tag"
     ref="el"
-    :class="[
-      { button_block: 'block' in $attrs && $attrs.block !== false },
-      $attrs?.variant ? `button_${$attrs.variant}` : 'button_secondary',
-    ]"
+    :class="[{ 'button_block': block }, `button_${variant}`]"
     class="button"
   >
     <slot>BUTTON</slot>
@@ -16,6 +13,12 @@
 export default {
   name: 'UiButton',
   props: {
+    block: Boolean,
+    variant: {
+      type: String,
+      required: false,
+      default: 'secondary'
+    },
     tag: {
       type: [String, Object, Function],
       default: 'button'
