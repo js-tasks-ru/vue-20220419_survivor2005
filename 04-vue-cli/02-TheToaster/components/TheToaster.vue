@@ -1,17 +1,18 @@
 <template>
   <div class="toasts">
     <template v-for="(toaster, i) in toasters" :key="i">
-      <the-toaster-item
-        :stCls="toaster.stCls"
+      <toaster-item
+        :styleClass="toaster.styleClass"
         :icon="toaster.icon"
         :message="toaster.message"
-      ></the-toaster-item>
+        @remove="autoRemove()"
+      ></toaster-item>
     </template>
   </div>
 </template>
 
 <script>
-import TheToasterItem from './TheToasterItem.vue';
+import ToasterItem from './ToasterItem.vue';
 
 export default {
   name: 'TheToaster',
@@ -23,28 +24,24 @@ export default {
   },
 
   methods: {
-    createToaster (message, icon, stCls) {
-      this.toasters.push({ message, icon, stCls })
+    success (message) {
+      this.toasters.push({message, icon: 'check-circle', styleClass: 'toast_success'})
     },
 
-    removeToaster (ms = 5000) {
-      setTimeout(()=>{
-        this.toasters.shift()
-      }, ms)
+    error (message) {
+      this.toasters.push({message, icon: 'alert-circle', styleClass: 'toast_error'})
     },
 
-    success (msg) {
-      this.createToaster(msg, "check-circle", "toast_success")
-      this.removeToaster()
+    autoRemove (timer = 5000) {
+      setTimeout(
+        () => {
+          this.toasters.shift()
+        }, timer
+      )
     },
-
-    error (msg) {
-      this.createToaster(msg, "alert-circle", "toast_error")
-      this.removeToaster()
-    }
   },
 
-  components: { TheToasterItem },
+  components: { ToasterItem },
 };
 </script>
 

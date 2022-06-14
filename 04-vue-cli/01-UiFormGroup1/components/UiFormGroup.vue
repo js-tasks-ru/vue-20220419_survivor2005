@@ -12,8 +12,8 @@ export default {
   name: 'UiFormGroup',
 
   props: {
-    inline: false,
-    label: undefined
+    inline: Boolean,
+    label: String
   }
 };
 </script>

@@ -1,6 +1,5 @@
 <template>
-  <div v-if="isOpen" class="toast" :class="stCls">
-    <span @click="isOpen = !isOpen">x</span>
+  <div class="toast" :class="styleClass">
     <ui-icon class="toast__icon" :icon="icon" />
     <span>{{ message }}</span>
   </div>
@@ -10,21 +9,28 @@
 import UiIcon from './UiIcon';
 
 export default {
-  name: 'TheToasterItem',
+  name: 'ToasterItem',
 
-  data() {
-    return {
-      isOpen: true
-    }
+  emits: ['auto-remove', 'remove'],
+
+  created () {
+    this.remove()
   },
 
   props: {
-    stCls: String,
+    styleClass: String,
     icon: String,
     message: String,
   },
 
-  components: { UiIcon }
+  methods: {
+    remove () {
+      this.$emit('remove')
+    }
+  },
+
+  components: { UiIcon },
+
 }
 
 </script>

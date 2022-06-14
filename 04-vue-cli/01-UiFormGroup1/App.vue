@@ -17,13 +17,13 @@
     <hr />
 
     <div>
-      <ui-form-group :inline="true">
+      <ui-form-group inline>
         <div class="input-group">
           <input class="form-control" placeholder="Inline" />
         </div>
       </ui-form-group>
 
-      <ui-form-group :inline="true">
+      <ui-form-group inline>
         <div class="input-group">
           <input class="form-control" placeholder="Inline" />
         </div>

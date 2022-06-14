@@ -1,9 +1,9 @@
 <template>
   <component
     :is="tag"
-    ref="el"
     :class="[{ 'button_block': block }, `button_${variant}`]"
     class="button"
+    :type="type"
   >
     <slot>BUTTON</slot>
   </component>
@@ -24,17 +24,9 @@ export default {
       default: 'button'
     }
   },
-
-  mounted () {
-    this.setAttrType()
-  },
-
-
-  methods: {
-    setAttrType () {
-       if (this.$refs.el.tagName === 'BUTTON' && !this.$attrs?.type) {
-         this.$refs.el.type = 'button'
-       }
+  computed: {
+    type () {
+      return this.tag === 'button' ? this.tag : undefined
     }
   }
 };

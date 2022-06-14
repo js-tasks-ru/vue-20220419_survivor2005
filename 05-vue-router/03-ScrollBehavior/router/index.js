@@ -49,7 +49,7 @@ export const router = createRouter({
       return { el: to.hash }
     }
     else if (from.meta.saveScrollPosition) {
-      return {}
+      return false
     }
     else {
       return {left: 0, top: 0}

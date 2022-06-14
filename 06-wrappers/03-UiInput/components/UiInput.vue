@@ -11,7 +11,7 @@
       <slot name="left-icon"></slot>
     </div>
 
-    <component :is="setTag()"
+    <component :is="tag"
       ref="input"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
@@ -41,14 +41,16 @@ export default {
     modelValue: String,
   },
 
-  methods: {
-    setTag () {
+  computed: {
+    tag () {
       return this.multiline ? 'textarea' : 'input'
-    },
+    }
+  },
+  methods: {
     focus () {
       this.$refs.input.focus()
     }
- }
+  }
 
 };
 </script>
