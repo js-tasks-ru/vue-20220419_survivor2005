@@ -14,11 +14,11 @@ export default defineComponent({
 
   // Шаблон лучше держать максимально простым, а логику выносить в методы
   methods: {
-    increase(value) {
-      this.$emit('update:count', ++value)
+    increase() {
+      this.$emit('update:count', this.count + 1)
     }
   },
 
   // Шаблон потребуется отредактировать
-  template: `<button type="button" @click="increase(count)">{{ count }}</button>`,
+  template: `<button type="button" @click="increase">{{ count }}</button>`,
 });
